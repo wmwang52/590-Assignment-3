@@ -1,6 +1,6 @@
--module(test).
--export([main_loop/0, factorial/1]).
-
+% team("Dylan Nicks, Coralee Rogers-Vickers, William Wang").
+-module(a3).
+-export([main_loop/0]).
 main_loop() ->
     process_number(),
     main_loop().
@@ -8,33 +8,30 @@ main_loop() ->
 process_number() ->
     io:format("Enter a number: "),
     Input = io:get_line(""),
-    
     case parse_integer(string:trim(Input)) of
         {ok, N} ->
             handle_integer(N);
         error ->
             io:format("Not an integer.~n"),
-            ok 
+            ok
     end.
 
 parse_integer(String) ->
     try 
-        {Int, Rest} = string:to_integer(String),
-        case Rest of
-            "" -> {ok, Int};
-            _  -> error
-        end
+        {Int, ""} = string:to_integer(String),
+        {ok, Int}
     catch
-        _:_ -> 
-            error
+        _:_ -> error
     end.
 
 handle_integer(N) when N < 0 ->
     Result = math:pow(abs(N), 7),
-    io:format("~w raised to the 7th power is: ~w~n", [abs(N), Result]);
+    io:format("~w raised to the 7th power is: ~.2f~n", [abs(N), Result]);
+
 handle_integer(0) ->
     io:format("You entered 0. Ending program.~n"),
     halt();
+
 handle_integer(N) when N > 0 ->
     if 
         N rem 7 == 0 -> 
