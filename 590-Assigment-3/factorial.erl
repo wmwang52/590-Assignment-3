@@ -1,5 +1,5 @@
 % team("Dylan Nicks, Coralee Rogers-Vickers, William Wang").
--module(a3).
+-module(factorial).
 -export([main_loop/0]).
 main_loop() ->
     process_number(),
